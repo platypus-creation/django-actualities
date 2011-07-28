@@ -1,2 +1,2 @@
 include LICENSE README.md AUTHORS
-recursive-include templates/actualities *.html
+recursive-include actualities/templates/actualities *.html
