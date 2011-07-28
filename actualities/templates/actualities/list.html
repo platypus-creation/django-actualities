@@ -1,0 +1,5 @@
+<ul>
+{% for actuality in actualities %}
+    <li><a href="{{ actuality.get_absolute_url }}">{{ actuality.current.title }}</a></li>
+{% endfor %}
+</ul>
