@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from actualities.models import Actuality
 
 def list(request):
-    actualities = Actuality.objects.published()
+    last_actualities = Actuality.objects.published()
     return render(request, 'actualities/list.html', locals())
     
 def actuality(request, year, month, day, slug):

@@ -1,3 +1,43 @@
-<h1>{{ actuality.current.title }}</h1>
-<img src="{{ actuality.current.picture.url }}" />
-<div class="text">{{ actuality.current.text|safe }}</div>
+{% extends "actualities/base.html" %}
+{% load comments i18n %}
+
+{% block title %}
+{{ actuality.current.title }}
+{% endblock %}
+
+{% block content_title %}
+<h1>{{ actuality.current.title }}</h1>    
+{% endblock %}
+
+{% block content %}
+    <img src="{{ actuality.current.picture.url }}" />
+    <div class="text">{{ actuality.current.text|safe }}</div>
+{% endblock %}
+
+{% block comments %}
+    {% if actuality.allow_comments %}
+        {% get_comment_list for actuality as comments %}
+        {% get_comment_form for actuality as form %}
+        <div class="comments">
+            <ul>
+                {% for comment in comments %}
+                    {% if comment.is_public and not comment.is_removed %}
+                        <li>
+                            {% firstof comment.user.username comment.user_name %}
+                            <span class="date">{{ comment.submit_date|date }}</span>
+                            <div class="comment">
+                                {{ comment.comment }}
+                            </div>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <form method="post" action="{% comment_form_target %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="hidden" name="next" value="{{ request.path }}" />
+                <button type="submit">{% trans "Comment" %}</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
