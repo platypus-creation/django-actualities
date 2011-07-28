@@ -15,6 +15,8 @@ class Actuality(models.Model):
     published = models.BooleanField(_(u'Published'), default=False)
     published_at = models.DateTimeField(blank=True)
 
+    allow_comments = models.BooleanField(_(u'Allow comments'), default=True)
+
     objects = ActualityManager()
     
     class Meta:
