@@ -11,26 +11,19 @@ class Migration(SchemaMigration):
         # Adding model 'Actuality'
         db.create_table('actualities_actuality', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('published_at', self.gf('django.db.models.fields.DateTimeField')(blank=True)),
-        ))
-        db.send_create_signal('actualities', ['Actuality'])
-
-        # Adding model 'Version'
-        db.create_table('actualities_version', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('actuality', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['actualities.Actuality'])),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('title', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(db_index=True, max_length=255, blank=True)),
             ('picture', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('text', self.gf('django.db.models.fields.TextField')(blank=True)),
-            ('short_text', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('revision', self.gf('django.db.models.fields.IntegerField')(blank=True)),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('short_text', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('published_at', self.gf('django.db.models.fields.DateTimeField')(blank=True)),
+            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('allow_comments', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('created_at', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
             ('modified_at', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('author', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
-        db.send_create_signal('actualities', ['Version'])
+        db.send_create_signal('actualities', ['Actuality'])
 
 
     def backwards(self, orm):
@@ -38,30 +31,22 @@ class Migration(SchemaMigration):
         # Deleting model 'Actuality'
         db.delete_table('actualities_actuality')
 
-        # Deleting model 'Version'
-        db.delete_table('actualities_version')
-
 
     models = {
         'actualities.actuality': {
             'Meta': {'ordering': "('-published',)", 'object_name': 'Actuality'},
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'published_at': ('django.db.models.fields.DateTimeField', [], {'blank': 'True'})
-        },
-        'actualities.version': {
-            'Meta': {'ordering': "('-revision',)", 'object_name': 'Version'},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'actuality': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['actualities.Actuality']"}),
+            'allow_comments': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'author': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
             'created_at': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'picture': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
-            'revision': ('django.db.models.fields.IntegerField', [], {'blank': 'True'}),
-            'short_text': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
+            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'published_at': ('django.db.models.fields.DateTimeField', [], {'blank': 'True'}),
+            'short_text': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'db_index': 'True', 'max_length': '255', 'blank': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'})
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '255'})
         },
         'auth.group': {
             'Meta': {'object_name': 'Group'},

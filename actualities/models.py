@@ -12,60 +12,38 @@ class ActualityManager(models.Manager):
 class Actuality(models.Model):
     """(Actuality description)"""
 
+    title = models.CharField(_(u'Title'), max_length=255)
+    slug = AutoSlugField(_(u'Slug'), populate_from='title', max_length=255, editable=True)
+    
+    picture = models.ImageField(_(u'Picture'), upload_to=settings.ACTUALITIES_UPLOAD)
+    text = models.TextField(_(u'Text'), blank=True)
+    short_text = models.CharField(_(u'Short text'), max_length=255)
+
     published = models.BooleanField(_(u'Published'), default=False)
     published_at = models.DateTimeField(blank=True)
+    author = models.ForeignKey(User, verbose_name=_(u'Author'))
 
     allow_comments = models.BooleanField(_(u'Allow comments'), default=True)
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    modified_at = models.DateTimeField(auto_now=True)
+    
     objects = ActualityManager()
     
+    def __unicode__(self):
+        return self.title
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ('actualities.views.actuality', (), {
+            'year': self.published_at.strftime('%Y'),
+            'month': self.published_at.strftime('%m'),
+            'day': self.published_at.strftime('%d'),
+            'slug': self.slug,
+        })
+
     class Meta:
         ordering = ('-published',)
         get_latest_by = ''
         verbose_name_plural = _(u'Actualities')
 
-    def current(self):
-        return self.versions.get(active=True)
-
-    def __unicode__(self):
-        return self.current().title
-    
-    def get_absolute_url(self):
-        return self.current().get_absolute_url()
-
-class Version(models.Model):
-    """(Version description)"""
-    
-    actuality = models.ForeignKey(Actuality, related_name='versions')
-    
-    title = models.CharField(_(u'Title'), max_length=255)
-    slug = AutoSlugField(_(u'Slug'), populate_from='title', max_length=255, editable=True)
-    
-    picture = models.ImageField(_(u'Picture'), upload_to=settings.ACTUALITIES_UPLOAD)
-    text = models.TextField(_(u'Text'))
-    short_text = models.CharField(_(u'Short text'), max_length=255)
-    
-    revision = models.IntegerField(blank=True)
-    active = models.BooleanField(default=False)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    modified_at = models.DateTimeField(auto_now=True)
-
-    author = models.ForeignKey(User, verbose_name=_(u'Author'))
-
-    class Meta:
-        ordering = ('-revision',)
-        get_latest_by = ''
-        verbose_name_plural = _(u'Versions')
-
-    def __unicode__(self):
-        return '%s %s' % (self.title, self.created_at)
-    
-    @models.permalink
-    def get_absolute_url(self):
-        return ('actualities.views.actuality', (), {
-            'year': self.actuality.published_at.strftime('%Y'),
-            'month': self.actuality.published_at.strftime('%m'),
-            'day': self.actuality.published_at.strftime('%d'),
-            'slug': self.slug,
-        })

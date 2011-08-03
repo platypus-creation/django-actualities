@@ -6,5 +6,5 @@ def list(request):
     return render(request, 'actualities/list.html', locals())
     
 def actuality(request, year, month, day, slug):
-    actuality = get_object_or_404(Actuality.objects.published(), versions__slug=slug, versions__active=True)
+    actuality = get_object_or_404(Actuality.objects.published(), slug=slug)
     return render(request, 'actualities/actuality.html', locals())
