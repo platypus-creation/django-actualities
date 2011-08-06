@@ -3,6 +3,7 @@ import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from django_extensions.db.fields import AutoSlugField
+from taggit.managers import TaggableManager
 import datetime
 
 class ActualityManager(models.Manager):
@@ -27,6 +28,8 @@ class Actuality(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
+    
+    tags = TaggableManager()
     
     objects = ActualityManager()
     

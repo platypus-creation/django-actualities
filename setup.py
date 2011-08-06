@@ -10,5 +10,8 @@ setup(
     author_email = "contact@platypus-creation.com",
     url = "https://github.com/platypus-creation/django-actualities",
     packages = find_packages(),
-    include_package_data=True,    
+    include_package_data=True,
+    require = [
+        'django-taggit==0.9.3',
+    ]
 )
