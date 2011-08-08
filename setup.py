@@ -11,7 +11,7 @@ setup(
     url = "https://github.com/platypus-creation/django-actualities",
     packages = find_packages(),
     include_package_data=True,
-    require = [
+    requires = [
         'django-taggit==0.9.3',
-    ]
+    ],
 )
