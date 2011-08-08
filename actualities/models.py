@@ -24,7 +24,7 @@ class Actuality(models.Model):
     published_at = models.DateTimeField(blank=True)
     author = models.ForeignKey(User, verbose_name=_(u'Author'))
 
-    allow_comments = models.BooleanField(_(u'Allow comments'), default=True)
+    enable_comments = models.BooleanField(_(u'Enable comments'), default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     modified_at = models.DateTimeField(auto_now=True)
