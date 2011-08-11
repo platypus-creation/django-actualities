@@ -1,5 +1,5 @@
-<ul class="last_actualities">
+<ul class="last_actualities">{% spaceless %}
 {% for actuality in last_actualities %}
     <li>{% include "actualities/actuality_snippet.html" %}</li>
 {% endfor %}
-</ul>
+{% endspaceless %}</ul>
