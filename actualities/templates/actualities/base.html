@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8"/>
     	<title>{% block title %}{% endblock %}</title>
+    	{% block extra_head %}
+    	<link rel="alternate" type="application/rss+xml" title="RSS"href="{% url actualities_rss %}">
+    	{% endblock %}
     </head>
     <body>
         {% block content_title %}

@@ -1,5 +1,9 @@
-<ul>
-{% for actuality in last_actualities %}
-    <li><a href="{{ actuality.get_absolute_url }}">{{ actuality.title }}</a></li>
-{% endfor %}
-</ul>
+{% extends "base.html" %}
+
+{% block content %}
+    <ul>
+    {% for actuality in last_actualities %}
+        <li><a href="{{ actuality.get_absolute_url }}">{{ actuality.title }}</a></li>
+    {% endfor %}
+    </ul>    
+{% endblock %}
