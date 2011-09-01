@@ -1,0 +1,65 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-08-31 11:22+0200\n"
+"PO-Revision-Date: 2011-08-31 11:24\n"
+"Last-Translator: Guillaume Esquevin <guillaume.esquevin@platypus-creation.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"X-Translated-Using: django-rosetta 0.6.2\n"
+
+#: feeds.py:11
+#, python-format
+msgid "%s's news"
+msgstr "Actualités de %s"
+
+#: models.py:16
+msgid "Title"
+msgstr "Titre"
+
+#: models.py:17
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:19
+msgid "Picture"
+msgstr "Image"
+
+#: models.py:20
+msgid "Text"
+msgstr "Texte"
+
+#: models.py:21
+msgid "Short text"
+msgstr "Texte court"
+
+#: models.py:23
+msgid "Published"
+msgstr "Publié"
+
+#: models.py:25
+msgid "Author"
+msgstr "Auteur"
+
+#: models.py:27
+msgid "Enable comments"
+msgstr "Activer les commentaires"
+
+#: models.py:51 models.py:52
+msgid "News"
+msgstr "Actualités"
+
+#: templates/actualities/actuality.html:39
+msgid "Comment"
+msgstr "Commentaire"

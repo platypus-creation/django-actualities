@@ -10,4 +10,13 @@ def last_actualities(nb=4):
     return {
         'last_actualities': last_actualities[:nb]
     }
+
+@register.inclusion_tag('actualities/last_actualities.html')
+def filtered_actualities(tags, nb=4):
+    if not hasattr(tags, '__iter__'):
+        tags = [tags]
+    last_actualities = Actuality.objects.published().filter(tags__name__in=tags)
+    return {
+        'last_actualities': last_actualities[:nb]
+    }
     

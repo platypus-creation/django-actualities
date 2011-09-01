@@ -8,7 +8,7 @@ currentSite = Site.objects.get_current()
 
 class ActualitiesFeed(Feed):
     title = currentSite.name
-    description = _(u"%s's actualities") % currentSite.name
+    description = _(u"%s's news") % currentSite.name
 
     def link(self):
         return reverse('actualities.views.list')

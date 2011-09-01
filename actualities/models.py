@@ -48,5 +48,6 @@ class Actuality(models.Model):
     class Meta:
         ordering = ('-published',)
         get_latest_by = ''
-        verbose_name_plural = _(u'Actualities')
+        verbose_name = _(u'News')
+        verbose_name_plural = _(u'News')
 
