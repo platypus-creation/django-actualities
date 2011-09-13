@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "django-actualities",
-    version = "0.2.0",
+    version = "0.2.1",
     description = """
     A django blog app
     """,

@@ -21,7 +21,7 @@ class Actuality(models.Model):
     short_text = models.CharField(_(u'Short text'), max_length=255)
 
     published = models.BooleanField(_(u'Published'), default=False)
-    published_at = models.DateTimeField(blank=True)
+    published_at = models.DateTimeField(default=datetime.datetime.now)
     author = models.ForeignKey(User, verbose_name=_(u'Author'))
 
     enable_comments = models.BooleanField(_(u'Enable comments'), default=True)
