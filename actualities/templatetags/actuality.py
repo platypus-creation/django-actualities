@@ -15,7 +15,7 @@ def last_actualities(nb=4):
 def filtered_actualities(tags, nb=4):
     if not hasattr(tags, '__iter__'):
         tags = [tags]
-    last_actualities = Actuality.objects.published().filter(tags__name__in=tags)
+    last_actualities = Actuality.objects.published().filter(tags__name__in=tags).distinct()
     return {
         'last_actualities': last_actualities[:nb]
     }
